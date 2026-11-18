@@ -1,0 +1,22 @@
+# Render Blueprint for the backend. Render reads this file when you choose
+# New → Blueprint and pick this repo. Secrets are entered in the dashboard
+# (sync: false), never written here.
+services:
+  - type: web
+    name: url-shortener-api
+    runtime: node
+    plan: free
+    region: frankfurt # same region as the Neon database (aws-eu-central-1)
+    rootDir: backend
+    # Migrations run on every deploy. They're idempotent: already-applied
+    # ones are skipped, so a deploy with no schema change does nothing here.
+    buildCommand: npm ci && npm run build && npm run db:migrate
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL # pooled, for the app
+        sync: false
+      - key: DATABASE_URL_UNPOOLED # direct, for migrations
+        sync: false
+      - key: FRONTEND_URL # your Vercel address, for CORS
+        sync: false
