@@ -16,7 +16,8 @@ app.set("trust proxy", 1);
 
 // Which websites may call this API from the browser. Locally that's the Vite
 // dev server; in production you set FRONTEND_URL to your Vercel address.
-const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
+// A browser's Origin never ends in "/", so drop one if it was pasted with it.
+const FRONTEND_URL = (process.env.FRONTEND_URL || "http://localhost:5173").replace(/\/+$/, "");
 app.use(cors({ origin: FRONTEND_URL }));
 
 // Turns a JSON request body into a JS object on req.body.
