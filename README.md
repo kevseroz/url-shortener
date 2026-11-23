@@ -2,7 +2,9 @@
 
 Paste a long link, get a short one, and see how many times it was opened.
 
-**Live:** _coming soon_
+**Live:** https://url-shortener-eight-omega-44.vercel.app
+
+_The backend runs on Render's free plan and sleeps after 15 minutes without visitors, so the first link you shorten may take up to a minute._
 
 ![Screenshot](docs/screenshot.png)
 
