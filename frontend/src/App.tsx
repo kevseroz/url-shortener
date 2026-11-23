@@ -180,7 +180,9 @@ export default function App() {
                   </div>
                   <span className="ticket-meta">
                     <span className="ticket-clicks">
-                      {link.clicks} {link.clicks === 1 ? "click" : "clicks"}
+                      {link.clicks === 0
+                        ? "Not opened yet"
+                        : `Opened ${link.clicks} ${link.clicks === 1 ? "time" : "times"}`}
                     </span>
                     <span className="ticket-time">{timeAgo(link.createdAt)}</span>
                   </span>
